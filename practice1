@@ -1,0 +1,18 @@
+''' 네이버 웹소설 - 운명같은 소리 하네 단어 빈도수 확인 '''
+
+from selenium import webdriver
+from bs4 import BeautifulSoup
+driver_path= '../resources/chromedriver'  # driver path
+
+urls =[]
+a=list(range(1,21))
+for x in a :
+    urls.append('https://novel.naver.com/webnovel/detail.nhn?novelId=799261&volumeNo=%s' % x)
+browser = webdriver.Chrome(executable_path=driver_path)  # Chrome driver
+for url in urls:
+    browser.get(url)
+    for x in a :
+        x = browser.page_source  # get html source
+        soup = BeautifulSoup(x, "html.parser") #html parsing
+        print(soup.prettify()) # check it
+browser.quit()
